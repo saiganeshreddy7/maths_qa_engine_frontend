@@ -1,0 +1,32 @@
+/* Main App Layout */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat Header */
+.chat-header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #34495e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.conv-id {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-family: monospace;
+}
