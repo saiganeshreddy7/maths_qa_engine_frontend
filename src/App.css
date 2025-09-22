@@ -1,13 +1,35 @@
 /* Main App Layout */
 .app {
   display: flex;
-  flex-direction: column;
   height: 100vh;
   width: 100%;
   margin: 0;
   background: #f8f9fa;
-  position: relative;
   overflow: hidden;
+}
+
+/* Main content container (everything except sidebar) */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: margin-left 0.3s ease;
+  width: 100%;
+}
+
+/* When sidebar is open on mobile, push content */
+@media (max-width: 768px) {
+  .main-content.sidebar-open {
+    margin-left: 280px;
+  }
+}
+
+/* On desktop, always leave space for sidebar */
+@media (min-width: 769px) {
+  .main-content {
+    margin-left: 280px;
+  }
 }
 
 /* Chat Header */
@@ -21,10 +43,10 @@
   align-items: center;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 10;
   box-shadow: 0 3px 15px rgba(15, 23, 42, 0.15);
+  width: inherit;
+  right: 0;
 }
 
 .chat-header h1 {
@@ -41,6 +63,26 @@
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   backdrop-filter: blur(5px);
+}
+
+/* Menu toggle button */
+.menu-toggle {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.menu-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Main content area that will scroll */
@@ -65,14 +107,33 @@
   min-height: 1px;
 }
 
-/* New Chat Button Area */
+/* Hide the "New Chat" button in the main interface since it's in the sidebar now */
 .new-chat-container {
-  position: fixed;
-  top: 75px;
-  left: 20px;
-  z-index: 9;
+  display: none;
 }
 
+/* Media query to show the "New Chat" button only on mobile when the sidebar is hidden */
+@media (max-width: 768px) {
+  .new-chat-container {
+    display: block;
+    position: fixed;
+    top: 75px;
+    left: 20px;
+    z-index: 9;
+  }
+  
+  .menu-toggle {
+    display: flex;
+  }
+}
+
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }
+}
+
+/* New Chat Button Styling - leaving this for mobile view */
 .new-chat-btn {
   background: white;
   color: #4338ca;
