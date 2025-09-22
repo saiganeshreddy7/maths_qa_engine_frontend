@@ -8,13 +8,16 @@ import './Message.css';
 const Message = ({ message, onFeedback }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackDescription, setFeedbackDescription] = useState('');
+  
+  // Format timestamp
+  const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   const feedbackOptions = [
-    { value: 'correct', label: '✓ Correct', color: '#4caf50' },
-    { value: 'unclear', label: '? Unclear', color: '#ff9800' },
-    { value: 'not understandable', label: '✗ Not Understandable', color: '#f44336' },
-    { value: 'wrong', label: '✗ Wrong', color: '#f44336' },
-    { value: 'irrelevant', label: '⚠ Irrelevant', color: '#9e9e9e' }
+    { value: 'correct', label: '✓ Correct', color: '#38a169' },
+    { value: 'unclear', label: '? Unclear', color: '#dd6b20' },
+    { value: 'not understandable', label: '✗ Not Understandable', color: '#e53e3e' },
+    { value: 'wrong', label: '✗ Wrong', color: '#e53e3e' },
+    { value: 'irrelevant', label: '⚠ Irrelevant', color: '#718096' }
   ];
 
   const handleFeedbackSubmit = (value) => {
@@ -34,6 +37,7 @@ const Message = ({ message, onFeedback }) => {
 
       {/* AI Answer */}
       <div className={`ai-message ${message.isError ? 'error' : ''}`}>
+        <div className="message-avatar">AI</div>
         <div className="message-content">
           <ReactMarkdown
             remarkPlugins={[remarkMath]}
@@ -48,10 +52,10 @@ const Message = ({ message, onFeedback }) => {
           <div className="feedback-section">
             {message.feedback ? (
               <div className="feedback-submitted">
-                <span>Feedback submitted: {message.feedback.value}</span>
+                <span>Feedback: {message.feedback.value}</span>
                 {message.feedback.description && (
                   <span className="feedback-description">
-                    - {message.feedback.description}
+                    {message.feedback.description}
                   </span>
                 )}
               </div>

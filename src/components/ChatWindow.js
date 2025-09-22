@@ -3,6 +3,22 @@ import Message from './Message';
 import './ChatWindow.css';
 
 const ChatWindow = ({ messages, onFeedback, loading }) => {
+  // Example questions that can be clicked
+  const exampleQuestions = [
+    "What is the derivative of x²?",
+    "Solve 2x + 5 = 15",
+    "Explain the Pythagorean theorem"
+  ];
+
+  // Function to handle when an example question is clicked
+  const handleExampleClick = (question) => {
+    // Create a custom event to simulate typing the question
+    const customEvent = new CustomEvent('exampleQuestionClicked', {
+      detail: { question }
+    });
+    document.dispatchEvent(customEvent);
+  };
+
   return (
     <div className="chat-window">
       {messages.length === 0 ? (
@@ -12,9 +28,11 @@ const ChatWindow = ({ messages, onFeedback, loading }) => {
           <div className="example-questions">
             <p>Try asking:</p>
             <ul>
-              <li>"What is the derivative of x²?"</li>
-              <li>"Solve 2x + 5 = 15"</li>
-              <li>"Explain the Pythagorean theorem"</li>
+              {exampleQuestions.map((question, index) => (
+                <li key={index} onClick={() => handleExampleClick(question)}>
+                  "{question}"
+                </li>
+              ))}
             </ul>
           </div>
         </div>

@@ -75,19 +75,37 @@ function App() {
 
   return (
     <div className="app">
+      {/* Fixed header */}
       <div className="chat-header">
         <h1>Math Q&A Assistant</h1>
         {convId && <span className="conv-id">Conversation: {convId}</span>}
       </div>
       
-      <ChatWindow 
-        messages={messages} 
-        onFeedback={handleFeedback}
-        loading={loading}
-      />
+      {/* New Chat Button fixed at top left */}
+      <div className="new-chat-container">
+        <button 
+          onClick={handleNewChat}
+          disabled={loading}
+          className="new-chat-btn"
+          title="Start a new conversation"
+        >
+          New Chat
+        </button>
+      </div>
       
-      <div ref={chatEndRef} />
+      {/* Scrollable chat content area */}
+      <div className="chat-content-area">
+        <ChatWindow 
+          messages={messages} 
+          onFeedback={handleFeedback}
+          loading={loading}
+        />
+        
+        {/* Scroll anchor for auto-scrolling */}
+        <div ref={chatEndRef} className="scroll-anchor" />
+      </div>
       
+      {/* Fixed input bar at the bottom */}
       <InputBar 
         onSendMessage={handleSendMessage}
         onNewChat={handleNewChat}
